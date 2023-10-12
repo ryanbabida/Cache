@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-
-namespace Cache
+﻿namespace Cache
 {
     public class SetAssociativeCache<K, V> where K : IComparable<K>
     {
