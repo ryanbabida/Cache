@@ -14,7 +14,7 @@ namespace Cache.Test
         [TestMethod]
         public void InitializeTest_InvalidMaxCount()
         {
-            Assert.ThrowsException<ArgumentException>(() => 
+            Assert.ThrowsException<ArgumentException>(() =>
                 new SetAssociativeCache<string, string>(0, 2));
         }
 
