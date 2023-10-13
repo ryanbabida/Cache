@@ -35,7 +35,7 @@ namespace Cache.Test
         }
 
         [TestMethod]
-        public void GetTest()
+        public void AddTest()
         {
             var cache = new SetAssociativeCache<string, string>(2, 2);
             cache.TryAdd("key", "value");
@@ -43,6 +43,25 @@ namespace Cache.Test
 
             Assert.IsTrue(isSuccess);
             Assert.AreEqual("value", value);
+        }
+
+        [TestMethod]
+        public void RemoveTest()
+        {
+            var cache = new SetAssociativeCache<string, string>(2, 2);
+            cache.TryAdd("key", "value");
+            var isSuccess = cache.TryRemove("key");
+
+            Assert.IsTrue(isSuccess);
+        }
+
+        [TestMethod]
+        public void RemoveTest_NotFound()
+        {
+            var cache = new SetAssociativeCache<string, string>(2, 2);
+            var isSuccess = cache.TryRemove("key");
+
+            Assert.IsFalse(isSuccess);
         }
     }
 }

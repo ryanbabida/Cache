@@ -54,10 +54,10 @@
             var setIdx = Math.Abs(key.GetHashCode()) % _setCount;
             if (!Sets[setIdx].TryRemove(key))
             {
-                Count--;
                 return false;
             }
 
+            Count--;
             return true;
         }
 
