@@ -29,36 +29,36 @@
             }
 
             var setIdx = Math.Abs(key.GetHashCode()) % _setCount;
-            if (!Sets[setIdx].TryAdd(key, value))
+            if (Sets[setIdx].TryAdd(key, value))
             {
-                return false;
+                Count++;
+                return true;
             }
 
-            Count++;
-            return true;
+            return false;
         }
 
         public bool TryGet(K key, out V value)
         {
             var setIdx = Math.Abs(key.GetHashCode()) % _setCount;
-            if (!Sets[setIdx].TryGetValue(key, out value!))
+            if (Sets[setIdx].TryGetValue(key, out value!))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public bool TryRemove(K key)
         {
             var setIdx = Math.Abs(key.GetHashCode()) % _setCount;
-            if (!Sets[setIdx].TryRemove(key))
+            if (Sets[setIdx].TryRemove(key))
             {
-                return false;
+                Count--;
+                return true;
             }
 
-            Count--;
-            return true;
+            return false;
         }
 
         public void Validate(int maxCount, int setCount)
