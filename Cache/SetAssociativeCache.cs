@@ -23,42 +23,27 @@
 
         public bool TryAdd(K key, V value)
         {
-            if (Count == _maxCount)
-            {
-                return false;
-            }
-
+            if (Count == _maxCount) return false;
             var setIdx = Math.Abs(key.GetHashCode()) % _setCount;
-            if (Sets[setIdx].TryAdd(key, value))
-            {
-                Count++;
-                return true;
-            }
+            if (!Sets[setIdx].TryAdd(key, value)) return false;
 
-            return false;
+            Count++;
+            return true;
         }
 
         public bool TryGet(K key, out V value)
         {
             var setIdx = Math.Abs(key.GetHashCode()) % _setCount;
-            if (Sets[setIdx].TryGetValue(key, out value!))
-            {
-                return true;
-            }
-
-            return false;
+            return Sets[setIdx].TryGetValue(key, out value!);
         }
 
         public bool TryRemove(K key)
         {
             var setIdx = Math.Abs(key.GetHashCode()) % _setCount;
-            if (Sets[setIdx].TryRemove(key))
-            {
-                Count--;
-                return true;
-            }
+            if (!Sets[setIdx].TryRemove(key)) return false;
 
-            return false;
+            Count--;
+            return true;
         }
 
         public void Validate(int maxCount, int setCount)
