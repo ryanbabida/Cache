@@ -46,7 +46,7 @@
             return true;
         }
 
-        public void Validate(int maxCount, int setCount)
+        private static void Validate(int maxCount, int setCount)
         {
             if (maxCount <= 0)
             {
